@@ -38,10 +38,10 @@ public class InputHandler : MonoBehaviour
     }
  private void OnInteractPerformed(InputAction.CallbackContext context)
     {
-        CharacterController.Jump();
+        CharacterController.Grab();
     }
  private void OnDropPerformed(InputAction.CallbackContext context)
     {
-        CharacterController.Jump();
+        CharacterController.Drop();
     }
 }
