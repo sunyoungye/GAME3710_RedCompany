@@ -19,7 +19,8 @@ public class InputHandler : MonoBehaviour
         _interactAction.performed += OnInteractPerformed;
         _dropAction.performed += OnDropPerformed;
 
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     // Update is called once per frame
