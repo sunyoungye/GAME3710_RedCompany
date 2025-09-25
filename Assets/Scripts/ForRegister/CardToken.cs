@@ -9,20 +9,20 @@ public class CardToken : MonoBehaviour
 
     public void Init(NpcController who) { owner = who; }
 
-    public void PickUp(Transform anchor)
+    // SimpleGrabber 호환(인자 없는 버전)
+    public void PickUp()
     {
-        isHeld = true; _holdAnchor = anchor;
+        isHeld = true;
         var col = GetComponent<Collider>(); if (col) col.enabled = false;
-        transform.SetParent(anchor, worldPositionStays: false);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
+        if (_holdAnchor)
+        {
+            transform.SetParent(_holdAnchor, worldPositionStays: false);
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+        }
     }
+    public void PickUp(Transform anchor) { _holdAnchor = anchor; PickUp(); }
 
-    public void Drop(Vector3 worldPos)
-    {
-        isHeld = false; _holdAnchor = null;
-        transform.SetParent(null);
-        transform.position = worldPos;
-        var col = GetComponent<Collider>(); if (col) col.enabled = true;
-    }
+    public void Drop() { isHeld = false; transform.SetParent(null); var col = GetComponent<Collider>(); if (col) col.enabled = true; }
+    public void Drop(Vector3 worldPos) { Drop(); transform.position = worldPos; }
 }

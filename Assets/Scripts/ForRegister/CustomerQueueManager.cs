@@ -6,11 +6,11 @@ public class CustomerQueueManager : MonoBehaviour
     [Header("Refs")]
     public PosManagerUI pos;
     public Transform spawnPoint, counterPoint, exitPoint;
-    public Transform[] counterSlots;     // 테이블 슬롯들
-    public Transform[] queueSpots;       // 줄 서는 위치들(앞이 0)
+    public Transform[] counterSlots;
+    public Transform[] queueSpots;
 
     [Header("Prefabs/Data")]
-    public GameObject npcPrefab;         // NpcController + NavMeshAgent 포함
+    public GameObject npcPrefab;
     public GameObject cardPrefab;
     public Transform cardSpawnPoint;
 
@@ -22,15 +22,19 @@ public class CustomerQueueManager : MonoBehaviour
 
     void Start()
     {
-        // 데모 주문 생성
         for (int i = 0; i < 5; i++) _orders.Enqueue(MakeOrder(Random.Range(2, 5)));
+
+        // ★ PosManagerUI의 이벤트 구독 (이름 반드시 같아야 함)
         pos.OnOrderPaid += OnOrderPaid;
 
         SpawnToQueue(3);
         TryDispatch();
     }
 
-    void OnDestroy() { if (pos) pos.OnOrderPaid -= OnOrderPaid; }
+    void OnDestroy()
+    {
+        if (pos) pos.OnOrderPaid -= OnOrderPaid;
+    }
 
     void OnOrderPaid(NpcController who)
     {
@@ -48,10 +52,9 @@ public class CustomerQueueManager : MonoBehaviour
             npc.cardPrefab = cardPrefab;
             npc.cardSpawnPoint = cardSpawnPoint;
 
-            // 줄 뒤로 보내기
             int spotIndex = Mathf.Min(_queue.Count, queueSpots.Length - 1);
             npc.agent.Warp(spawnPoint.position);
-            npc.agent.avoidancePriority = 50 + _queue.Count; // 서로 비켜가도록
+            npc.agent.avoidancePriority = 50 + _queue.Count;
             npc.Init(pos, counterPoint, exitPoint, counterSlots, order);
             npc.agent.SetDestination(queueSpots[spotIndex].position);
             _queue.Add(npc);
@@ -60,17 +63,19 @@ public class CustomerQueueManager : MonoBehaviour
 
     void TryDispatch()
     {
-        if (counterBusy || _queue.Count == 0) { if (_orders.Count > 0) SpawnToQueue(1); return; }
+        if (counterBusy || _queue.Count == 0)
+        {
+            if (_orders.Count > 0) SpawnToQueue(1);
+            return;
+        }
 
         counterBusy = true;
         var npc = _queue[0];
         _queue.RemoveAt(0);
 
-        // 나머지 줄 한 칸씩 땡기기
         for (int i = 0; i < _queue.Count; i++)
             _queue[i].agent.SetDestination(queueSpots[i].position);
 
-        // 카운터로 보내고 흐름 시작
         npc.BeginFlow();
 
         if (_orders.Count > 0) SpawnToQueue(1);

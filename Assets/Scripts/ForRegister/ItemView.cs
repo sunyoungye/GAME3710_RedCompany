@@ -3,25 +3,26 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class ItemView : MonoBehaviour
 {
-    public ItemSO item;
+    [SerializeField] private ItemSO _item;
+
     private PosManagerUI _pos;
+    private NpcController _npc;
 
-    [SerializeField] bool autoScanOnBind = true;
-
-    public void Bind(ItemSO so, PosManagerUI pos)
+    /// <summary>NPC가 스폰 후 즉시 호출</summary>
+    public void Bind(ItemSO item, PosManagerUI pos, NpcController owner)
     {
-        item = so;
+        _item = item;
         _pos = pos;
-        Debug.Log($"[ItemView.Bind] {item?.displayName}  pos={(pos ? pos.name : "NULL")}");
-        
-        if (autoScanOnBind && _pos != null && item != null)
-            _pos.AutoScan(item);     // 드랍되자마자 합계 반영
-
+        _npc = owner;
     }
 
+    // 3D 오브젝트 클릭 (Collider 필요)
     private void OnMouseDown()
     {
-        if (!autoScanOnBind && _pos != null && item != null)
-            _pos.AutoScan(item);
+        if (_item == null || _pos == null || _npc == null) return;
+
+        _pos.AddItemLine(_item); // POS 장바구니에 추가
+        _npc.OneItemScanned();   // NPC에 "한 개 처리됨" 알림
+        Destroy(gameObject);     // 클릭된 물건 제거
     }
 }

@@ -3,14 +3,21 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class CardReader : MonoBehaviour
 {
-    public PosManagerUI pos;
+    [SerializeField] private PosManagerUI pos;
 
-    void OnTriggerEnter(Collider other)
+    private void Reset()
     {
-        var card = other.GetComponentInParent<CardToken>();
-        if (card == null) return;
+        // Collider를 Trigger로 만들어두면 편함
+        var col = GetComponent<Collider>();
+        if (col) col.isTrigger = true;
+    }
 
-        pos.OnCardAcceptedByReader(card.owner); // 승인
-        Destroy(card.gameObject);               // 카드 제거
+    private void OnTriggerEnter(Collider other)
+    {
+        var token = other.GetComponent<CardToken>();
+        if (token == null || pos == null) return;
+
+        pos.OnCardAcceptedByReader(token.owner);
+        Destroy(token.gameObject);
     }
 }

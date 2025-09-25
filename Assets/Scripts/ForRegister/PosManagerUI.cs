@@ -8,7 +8,7 @@ public class CartLine
 {
     public ItemSO item;
     public int qty;
-    public int Line => item.priceCents * qty; // cents
+    public int Line => item.priceCents * qty;
 }
 
 public class PosManagerUI : MonoBehaviour
@@ -16,24 +16,20 @@ public class PosManagerUI : MonoBehaviour
     public event Action<NpcController> OnOrderPaid;
 
     [Header("UI")]
-    public PosUI ui;                           // PosUI 컴포넌트
-    public GameObject paymentCompletePanel;    // 옵션(완료 패널)
+    public PosUI ui;                          // (기존에 쓰던 UI 바인딩용 스크립트)
+    public GameObject paymentCompletePanel;   // 선택 항목
 
     private readonly List<CartLine> _cart = new();
     private NpcController _current;
 
-    public NpcController CurrentCustomer => _current; // 카드 소유자 지정용
-
-    void Awake()
+    private void Awake()
     {
         if (paymentCompletePanel) paymentCompletePanel.SetActive(false);
     }
 
     public void SetActiveCustomer(NpcController npc)
     {
-        Debug.Log($"[PosManagerUI] SetActiveCustomer({npc?.name})");
-
-        // 같은 손님이면 초기화 금지 (자동 스캔 직후 0으로 떨어지던 현상 방지)
+        // 같은 손님이면 다시 안내만
         if (_current == npc)
         {
             ui?.SetStatus("Place items, then tap card on reader.");
@@ -49,10 +45,9 @@ public class PosManagerUI : MonoBehaviour
         if (paymentCompletePanel) paymentCompletePanel.SetActive(false);
     }
 
-    // 아이템이 테이블에 놓일 때 자동 호출
-    public void AutoScan(ItemSO item)
+    /// <summary>아이템 클릭 시 POS 장바구니에 1개 라인 추가</summary>
+    public void AddItemLine(ItemSO item)
     {
-        Debug.Log($"[PosManagerUI.AutoScan] {item?.displayName}  price={item?.priceCents}");
         if (item == null) return;
 
         var line = _cart.FirstOrDefault(l => l.item == item);
@@ -62,10 +57,11 @@ public class PosManagerUI : MonoBehaviour
             _cart.Add(line);
         }
         line.qty++;
+
         RefreshUI();
     }
 
-    // 카드 리더기가 승인 신호를 줄 때 호출
+    // 카드리더기가 승인 신호를 줄 때 호출(Reader가 호출)
     public void OnCardAcceptedByReader(NpcController who)
     {
         if (who != _current) return;
@@ -74,41 +70,30 @@ public class PosManagerUI : MonoBehaviour
         ui?.SetStatus("Payment complete!");
         _cart.Clear();
         RefreshUI();
+
         if (paymentCompletePanel) paymentCompletePanel.SetActive(true);
 
-        var paid = _current;
+        var c = _current;
         _current = null;
-        OnOrderPaid?.Invoke(paid); // NPC에게 "결제 끝" 알림
+        OnOrderPaid?.Invoke(c);   // QueueManager/NPC 쪽에 결제 완료 신호
     }
 
-    int SubtotalCents() => _cart.Sum(l => l.Line);
+    private int Subtotal() => _cart.Sum(l => l.Line);
 
-    void RefreshUI()
+    private void RefreshUI()
     {
-        var subtotal = SubtotalCents();
-        ui?.SetSubtotalCents(subtotal);
+        ui?.SetSubtotalCents(Subtotal());
         ui?.RebuildItemLines(_cart.Select(l => (l.item.displayName, l.qty, l.Line)).ToList());
     }
 
-    string BuildReceipt()
+    private string BuildReceipt()
     {
         var sb = new System.Text.StringBuilder();
         sb.AppendLine("=== RECEIPT ===");
         foreach (var l in _cart)
-            sb.AppendLine($"{l.item.displayName} x{l.qty}  {(l.Line / 100f):0.00}");
+            sb.AppendLine($"{l.item.displayName} x{l.qty}  {l.Line / 100f:0.00}");
         sb.AppendLine("----------------");
-        sb.AppendLine($"TOTAL: {(SubtotalCents() / 100f):0.00}");
+        sb.AppendLine($"TOTAL: {Subtotal() / 100f:0.00}");
         return sb.ToString();
-    }
-
-    // (필요 시) 외부에서 수동 초기화할 때 사용
-    public void ClearSale()
-    {
-        Debug.Log("[PosManagerUI] ClearSale()");
-        _cart.Clear();
-        _current = null;
-        RefreshUI();
-        ui?.SetStatus("Waiting...");
-        if (paymentCompletePanel) paymentCompletePanel.SetActive(false);
     }
 }
