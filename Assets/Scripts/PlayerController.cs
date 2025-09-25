@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+LayerMask layerMask;
+public GameObject Grabbable;
+public Transform Grabarea;
     private CharacterController _characterController;
 
     public float MovementSpeed = 10f, RotationSpeed = 5f, JumpForce = 10f, Gravity = -30f;
@@ -14,6 +17,10 @@ public class PlayerController : MonoBehaviour
     {
         _characterController = GetComponent<CharacterController>();   
     }
+void Awake()
+{
+layerMask=LayerMask.GetMask("Item","Player");
+}
 
     public void Move(Vector2 movementVector)
     {
@@ -38,4 +45,15 @@ public class PlayerController : MonoBehaviour
             _verticalVelocity = JumpForce;
         }
     }
+    public void Grab()
+    {
+     RaycastHit hit;
+     if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+        {
+     Grabbable.transform.SetParent(Grabarea);
+        }
+     }
+    public void Drop(){
+    Grabbable.transform.parent=null;
+        }
 }

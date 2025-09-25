@@ -5,7 +5,7 @@ public class InputHandler : MonoBehaviour
 {
     public PlayerController CharacterController;
 
-    private InputAction _moveAction, _lookAction, _jumpAction;
+    private InputAction _moveAction, _lookAction, _jumpAction, _interactAction, _dropAction;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -13,10 +13,13 @@ public class InputHandler : MonoBehaviour
         _moveAction = InputSystem.actions.FindAction("Move");
         _lookAction = InputSystem.actions.FindAction("Look");
         _jumpAction = InputSystem.actions.FindAction("Jump");
-
+        _interactAction = InputSystem.actions.FindAction("Attack");
+        _dropAction = InputSystem.actions.FindAction("Drop");
         _jumpAction.performed += OnJumpPerformed;
+        _interactAction.performed += OnInteractPerformed;
+        _dropAction.performed += OnDropPerformed;
 
-        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -32,5 +35,13 @@ public class InputHandler : MonoBehaviour
     private void OnJumpPerformed(InputAction.CallbackContext context)
     {
         CharacterController.Jump();
+    }
+ private void OnInteractPerformed(InputAction.CallbackContext context)
+    {
+        CharacterController.Grab();
+    }
+ private void OnDropPerformed(InputAction.CallbackContext context)
+    {
+        CharacterController.Drop();
     }
 }
