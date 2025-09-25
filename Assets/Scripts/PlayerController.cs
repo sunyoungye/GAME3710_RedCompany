@@ -19,7 +19,7 @@ public Transform Grabarea;
     }
 void Awake()
 {
-layerMask=LayerMask.GetMask("Grabable","Player");
+layerMask=LayerMask.GetMask("Item","Player");
 }
 
     public void Move(Vector2 movementVector)
