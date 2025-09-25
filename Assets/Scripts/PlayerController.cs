@@ -6,7 +6,7 @@ LayerMask layerMask;
 public GameObject Grabbable;
 public Transform Grabarea;
     private CharacterController _characterController;
-
+    private 
     public float MovementSpeed = 10f, RotationSpeed = 5f, JumpForce = 10f, Gravity = -30f;
 
     private float _rotationY;

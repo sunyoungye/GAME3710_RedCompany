@@ -2268,6 +2268,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0.264, y: 0.001, z: 0.423}
+--- !u!1 &1131524712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1131524713}
+  m_Layer: 0
+  m_Name: Helditem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1131524713
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131524712}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.81, y: 0, z: 0.59}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1555834990}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1297681165
 GameObject:
   m_ObjectHideFlags: 0
@@ -3558,6 +3589,7 @@ Transform:
   m_Children:
   - {fileID: 331275759}
   - {fileID: 1688025773}
+  - {fileID: 1131524713}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 193.569, z: 0}
 --- !u!114 &1555834991
@@ -3572,6 +3604,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffaa13e52a973644b86ffa6ef2a1e73e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  Grabbable: {fileID: 0}
+  Grabarea: {fileID: 1131524713}
   MovementSpeed: 10
   RotationSpeed: 5
   JumpForce: 10
