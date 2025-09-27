@@ -1889,6 +1889,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Mop
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b185e302fda5ec9409fe2674c2b8e6cf, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
