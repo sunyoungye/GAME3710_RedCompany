@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 LayerMask layerMask;
-public GameObject Grabbable;
+public static GameObject Grabbable;
 public Transform Grabarea;
     private CharacterController _characterController;
 
@@ -47,13 +47,16 @@ layerMask=LayerMask.GetMask("Item","Player");
     }
     public void Grab()
     {
+
      RaycastHit hit;
-     if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+     if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask)&& Grabbable == null) 
         {
+     Grabbable = hit.transform.gameObject;
      Grabbable.transform.SetParent(Grabarea);
         }
      }
     public void Drop(){
     Grabbable.transform.parent=null;
+    Grabbable = null;
         }
 }
