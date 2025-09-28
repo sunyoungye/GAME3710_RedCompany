@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8640232154704954446}
   - component: {fileID: 607325901319772850}
   - component: {fileID: -965279421172024971}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,4 +124,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8466c30232307ac478b7c758d208a57d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemView
-  item: {fileID: 11400000, guid: ac4fcab359556b14a8d15da39c673ccf, type: 2}
+  _item: {fileID: 0}

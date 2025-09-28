@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2857051598049204484}
   - component: {fileID: 1954471030844465627}
   - component: {fileID: -2977258100241905987}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Apple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,4 +124,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8466c30232307ac478b7c758d208a57d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemView
-  item: {fileID: 11400000, guid: ff37e34874bd54d40a1c956f75215e50, type: 2}
+  _item: {fileID: 0}
