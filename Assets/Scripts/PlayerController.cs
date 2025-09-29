@@ -53,10 +53,13 @@ layerMask=LayerMask.GetMask("Item","Player");
         {
      Grabbable = hit.transform.gameObject;
      Grabbable.transform.SetParent(Grabarea);
+print(Grabbable);
         }
      }
     public void Drop(){
-    Grabbable.transform.parent=null;
-    Grabbable = null;
+    if(Grabbable != null){
+        Grabbable.transform.parent=null;
+        Grabbable = null;
         }
+}
 }
