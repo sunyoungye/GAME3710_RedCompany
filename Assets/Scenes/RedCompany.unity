@@ -1861,8 +1861,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.00000003502153, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.354547, y: 3.635849, z: 19.808968}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1936,18 +1936,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 330585543}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 579f4bc012493f94aad0324d53c8edab, type: 3}
+  m_Script: {fileID: 11500000, guid: c3f3365a09fbd9c4499f0b6df77daa8c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraMove
-  target: {fileID: 1555834990}
-  offset: {x: 0, y: 0, z: 4}
-  height: 0
-  yRotation: 10
-  yRotationMin: 10
-  yRotationMax: 5
-  xSensivity: 1
-  ySensivity: 1
-  invertX: 0
+  m_EditorClassIdentifier: Assembly-CSharp::CameraController
+  FollowTarget: {fileID: 1688025773}
+  LookTarget: {fileID: 1555834990}
+  FollowSpeed: 10
 --- !u!1 &331275758
 GameObject:
   m_ObjectHideFlags: 0
@@ -7007,8 +7001,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 331275759}
-  - {fileID: 1688025773}
   - {fileID: 1131524713}
+  - {fileID: 1688025773}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1555834991
@@ -7840,13 +7834,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1688025772}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.040974345, y: 0.010715998, z: 0.0015741637, w: 0.99910146}
-  m_LocalPosition: {x: -0.321, y: 1.28, z: -1.102}
+  m_LocalRotation: {x: 0.070289485, y: 0.010665166, z: 0.0018880982, w: 0.9974678}
+  m_LocalPosition: {x: -0.64199996, y: 2.3199997, z: -3.2200005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1555834990}
-  m_LocalEulerAnglesHint: {x: 4.694, y: 1.239, z: 0.231}
+  m_LocalEulerAnglesHint: {x: 8.058, y: 1.247, z: 0.305}
 --- !u!1001 &1712257926
 PrefabInstance:
   m_ObjectHideFlags: 0
