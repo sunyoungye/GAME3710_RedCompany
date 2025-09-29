@@ -3,12 +3,14 @@ using UnityEngine;
 public class NewMonoBehaviourScript : MonoBehaviour
 {
     private bool playerInside = false;
+    private PlayerController player; // reference to the player inside
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             playerInside = true;
+            player = other.GetComponent<PlayerController>(); // grab reference
         }
     }
 
@@ -17,6 +19,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInside = false;
+            player = null;
         }
     }
 
@@ -24,7 +27,15 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         if (playerInside && Input.GetKeyDown(KeyCode.F))
         {
-            Destroy(gameObject);
+            if (player != null && player.HasEquipped()) // ? only if mop equipped
+            {
+                Debug.Log("Spill cleaned!");
+                Destroy(gameObject);
+            }
+            else
+            {
+                Debug.Log("You need a mop to clean this!");
+            }
         }
     }
 }

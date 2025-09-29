@@ -62,4 +62,7 @@ print(Grabbable);
         Grabbable = null;
         }
 }
+public bool HasEquipped()
+{return Grabbable != null && Grabbable.name == "Mop" ;
+    }
 }
