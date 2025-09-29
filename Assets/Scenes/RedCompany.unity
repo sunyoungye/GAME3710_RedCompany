@@ -1811,7 +1811,7 @@ Camera:
   m_GameObject: {fileID: 330585543}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 4
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -1835,7 +1835,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1861,8 +1861,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.354547, y: 3.635849, z: 19.808968}
+  m_LocalRotation: {x: 0.15212342, y: 0.000000028055373, z: -0.000000004318136, w: 0.98836154}
+  m_LocalPosition: {x: 4.554547, y: 4.8670583, z: 13.505059}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1936,12 +1936,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 330585543}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3f3365a09fbd9c4499f0b6df77daa8c, type: 3}
+  m_Script: {fileID: 11500000, guid: 56dfa24f50d2eff4ebb21c077b4b3d74, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraController
-  FollowTarget: {fileID: 1688025773}
-  LookTarget: {fileID: 1555834990}
-  FollowSpeed: 10
+  m_EditorClassIdentifier: Assembly-CSharp::ThirdPersonCameraController
+  target: {fileID: 1555834990}
+  offset: {x: 0, y: 0, z: 4}
+  height: 2
+  xRotationMin: -5
+  xRotationMax: 15
+  xSensitivity: 0.3
+  ySensitivity: 1
+  invertX: 1
 --- !u!1 &331275758
 GameObject:
   m_ObjectHideFlags: 0
@@ -7022,6 +7027,12 @@ MonoBehaviour:
   RotationSpeed: 5
   JumpForce: 10
   Gravity: -30
+  camTransform: {fileID: 0}
+  MouseSensitivity: 2
+  MaxYawPerFrameDeg: 2
+  SpikeCutoff: 50
+  RequireLockedCursor: 1
+  YawSmoothTime: 0.06
 --- !u!1 &1556238840
 GameObject:
   m_ObjectHideFlags: 0
