@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class PlayerController : MonoBehaviour
 {
-LayerMask layerMask;
+
+    LayerMask layerMask;
 public static GameObject Grabbable;
 public Transform Grabarea;
     private CharacterController _characterController;
@@ -15,9 +17,10 @@ public Transform Grabarea;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _characterController = GetComponent<CharacterController>();   
+        _characterController = GetComponent<CharacterController>();  
     }
-void Awake()
+
+    void Awake()
 {
 layerMask=LayerMask.GetMask("Item","Player");
 }
@@ -27,6 +30,7 @@ layerMask=LayerMask.GetMask("Item","Player");
         Vector3 move = transform.forward * movementVector.y + transform.right * movementVector.x;
         move = move * MovementSpeed * Time.deltaTime;
         _characterController.Move(move);
+
 
         _verticalVelocity = _verticalVelocity + Gravity * Time.deltaTime;
         _characterController.Move(new Vector3(0, _verticalVelocity, 0) * Time.deltaTime);
