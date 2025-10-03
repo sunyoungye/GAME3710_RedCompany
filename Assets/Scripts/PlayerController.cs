@@ -5,8 +5,8 @@ public class PlayerController : MonoBehaviour
     LayerMask layerMask;
     public static GameObject Grabbable;
     public Transform Grabarea;
+    public Transform Item_find;
     private CharacterController _characterController;
-
     [Header("Movement")]
     public float MovementSpeed = 10f;
     public float RotationSpeed = 5f;      // W 전진 시 카메라 정면으로 맞추는 속도
@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Grabbable != null) return;
 
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 2.0f, layerMask))
+        if (Physics.Raycast(Item_find.position, Item_find.forward, out RaycastHit hit, 2.0f, layerMask))
         {
             Grabbable = hit.transform.gameObject;
             Grabbable.transform.SetParent(Grabarea, worldPositionStays: true);
