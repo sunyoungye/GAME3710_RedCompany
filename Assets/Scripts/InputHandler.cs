@@ -31,6 +31,14 @@ public class InputHandler : MonoBehaviour
 
         Vector2 lookVector = _lookAction.ReadValue<Vector2>();
         CharacterController.Rotate(lookVector);
+
+        //TA Hayes - just for my testing!!
+        if (Input.GetMouseButtonDown(0))
+        {
+            CharacterController.Grab();
+        }
+
+
     }
 
     private void OnJumpPerformed(InputAction.CallbackContext context)

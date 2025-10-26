@@ -108,12 +108,17 @@ public class PlayerController : MonoBehaviour
     public void Grab()
     {
         if (Grabbable != null) return;
-
-        if (Physics.Raycast(Item_find.position, Item_find.forward, out RaycastHit hit, 2.0f, layerMask))
+        Debug.DrawRay(Item_find.position, camTransform.forward, Color.red, 5f);
+        if (Physics.Raycast(Item_find.position, camTransform.forward, out RaycastHit hit, 5.0f, layerMask))
         {
             Grabbable = hit.transform.gameObject;
             Grabbable.transform.SetParent(Grabarea, worldPositionStays: true);
         }
+        
+        //OPTION 2 - you could also try implementing 3 raycasts that each shoot forward
+        //cast one from itemhold, one above itemhohld, and one below itemhold
+        //I do not recommend this option, as it will not be as accurate as option 1, 
+        //but you could certainly go this route!
     }
 
     public void Drop()
