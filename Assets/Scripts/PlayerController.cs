@@ -108,15 +108,8 @@ public class PlayerController : MonoBehaviour
     public void Grab()
     {
         if (Grabbable != null) return;
-
-
-        //OPTION 1 (MY RECOMOMENDATION! - instead of casting direction based on the itemhold,
-        //base the cast direction on the forward transform of the camera
-
-        //Debug lines to check where ray is casting
-        Debug.Log("Grabbing!");
         Debug.DrawRay(Item_find.position, camTransform.forward, Color.red, 5f);
-        if (Physics.Raycast(Item_find.position, camTransform.forward, out RaycastHit hit, 2.0f, layerMask))
+        if (Physics.Raycast(Item_find.position, camTransform.forward, out RaycastHit hit, 5.0f, layerMask))
         {
             Grabbable = hit.transform.gameObject;
             Grabbable.transform.SetParent(Grabarea, worldPositionStays: true);
