@@ -2,39 +2,44 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    LayerMask layerMask;
+    [Header("Raycast Layers")]
+    [SerializeField] private LayerMask layerMask; // Set in Inspector: include "Card", "Item", etc.
+
     public static GameObject Grabbable;
     public Transform Grabarea;
     public Transform Item_find;
+
     private CharacterController _characterController;
+
     [Header("Movement")]
     public float MovementSpeed = 10f;
-    public float RotationSpeed = 5f;      // W 전진 시 카메라 정면으로 맞추는 속도
+    public float RotationSpeed = 5f;
     public float JumpForce = 10f;
     public float Gravity = -30f;
 
     [Header("Camera")]
-    [SerializeField] private Transform camTransform; // 비우면 Camera.main 자동 할당
+    [SerializeField] private Transform camTransform; // Will be set by CameraSwitcher via SetCam()
 
-    [Header("Mouse Look (안전 장치 포함)")]
-    public float MouseSensitivity = 0.1f;     // 감도(작게 시작)
-    public float MaxYawPerFrameDeg = 2.0f;    // 1프레임당 적용 가능한 최대 각도(도)
-    public float SpikeCutoff = 50f;           // 이 값 이상 델타(픽셀)는 스파이크로 간주하고 무시
-    public bool RequireLockedCursor = true;   // 잠금 상태일 때만 회전 입력 처리
+    [Header("Mouse Look")]
+    public float MouseSensitivity = 0.1f;
+    public float MaxYawPerFrameDeg = 2.0f;
+    public float SpikeCutoff = 50f;
+    public bool RequireLockedCursor = true;
+    public float YawSmoothTime = 0.06f;
 
-    public float YawSmoothTime = 0.06f;       // 회전 스무딩
+    // Lock only movement/jump; keep interaction alive in POS
+    public bool ControlsLocked = false;
 
-    // 내부 회전 상태
-    private float _targetYaw;     // 목표 Yaw(마우스/자동정렬이 갱신)
-    private float _currentYaw;    // 실제 적용 Yaw(스무딩 결과)
-    private float _yawVel;        // SmoothDampAngle 속도
+    private float _targetYaw;
+    private float _currentYaw;
+    private float _yawVel;
 
-    private bool _wantAlignThisFrame; // 이번 프레임 전진 정렬 요청 플래그
+    private bool _wantAlignThisFrame;
     private float _verticalVelocity;
 
     void Awake()
     {
-        layerMask = LayerMask.GetMask("Item", "Player");
+        /*layerMask = LayerMask.GetMask("Item", "Player");*/
     }
 
     void Start()
@@ -46,10 +51,16 @@ public class PlayerController : MonoBehaviour
         _currentYaw = _targetYaw = transform.eulerAngles.y;
     }
 
-    // 이동: 회전은 '요청'만, 실제 적용은 LateUpdate에서만
+    public void SetCam(Transform t)
+    {
+        camTransform = t;
+    }
+
+    // Movement: guard by ControlsLocked
     public void Move(Vector2 movementVector)
     {
-        // 카메라 기준 이동 축
+        if (ControlsLocked) return;
+
         Vector3 fwd, right;
         if (camTransform != null)
         {
@@ -101,6 +112,7 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
+        if (ControlsLocked) return;
         if (_characterController.isGrounded)
             _verticalVelocity = JumpForce;
     }
@@ -108,7 +120,10 @@ public class PlayerController : MonoBehaviour
     public void Grab()
     {
         if (Grabbable != null) return;
-        Debug.DrawRay(Item_find.position, camTransform.forward, Color.red, 5f);
+        if (camTransform == null) return;
+
+        Debug.DrawRay(Item_find.position, camTransform.forward * 5f, Color.red, 0.25f);
+
         if (Physics.Raycast(Item_find.position, camTransform.forward, out RaycastHit hit, 5.0f, layerMask))
         {
             Grabbable = hit.transform.gameObject;
@@ -148,7 +163,6 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, _currentYaw, 0f);
     }
 
-    // 포커스 복귀 시 커서 잠그기(원하면 유지)
     void OnApplicationFocus(bool hasFocus)
     {
         if (hasFocus && RequireLockedCursor)
