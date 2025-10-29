@@ -2049,6 +2049,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SimpleGrabber
   cam: {fileID: 330585545}
   handAnchor: {fileID: 1538495253}
+  pos: {fileID: 0}
 --- !u!114 &330585550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4061,11 +4062,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977be06d477f0f948b19cc40797306f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PosRayDebug
-  cam: {fileID: 934898016}
-  mask:
-    serializedVersion: 2
-    m_Bits: 256
-  dist: 10
 --- !u!4 &764928429
 Transform:
   m_ObjectHideFlags: 0
@@ -4893,14 +4889,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4327c9b9f427c524394ab9ba1c7988d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraSwitcher
-  mainCamera: {fileID: 330585545}
-  posCamera: {fileID: 934898016}
-  grabber: {fileID: 330585549}
-  playerRoot: {fileID: 1555834990}
-  movementScript: {fileID: 1555834991}
-  cardLayerName: Card
-  enableHotkeyToExit: 1
-  exitKey: 31
 --- !u!20 &934898016
 Camera:
   m_ObjectHideFlags: 0
@@ -5023,10 +5011,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070b494f367c8d34488dacfa0737f218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardClickAccept
-  pos: {fileID: 1982216019}
-  clickMask:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!114 &934898020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8253,8 +8237,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1555834985}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.903, y: 1.86, z: 22.97}
+  m_LocalRotation: {x: -0, y: 0.99935347, z: -0, w: 0.035954643}
+  m_LocalPosition: {x: 1.2126907, y: 1.86, z: -8.347284}
   m_LocalScale: {x: 1.9362085, y: 1.9362085, z: 1.9362085}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8263,7 +8247,7 @@ Transform:
   - {fileID: 1688025773}
   - {fileID: 379366976}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 175.879, z: 0}
 --- !u!114 &1555834991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10148,7 +10132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91063ed609a7bed43b4ac1a1bc3cad2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PosTrigger
-  switcher: {fileID: 934898015}
 --- !u!65 &1917098369
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11496,3 +11479,30 @@ SceneRoots:
   - {fileID: 840049450}
   - {fileID: 1785393650}
   - {fileID: 764928429}
+  - {fileID: 449093933}
+  - {fileID: 620426314}
+  - {fileID: 967838737}
+  - {fileID: 645480579}
+  - {fileID: 1318039808}
+  - {fileID: 252392820}
+  - {fileID: 1316225164}
+  - {fileID: 1081607057}
+  - {fileID: 1628775545}
+  - {fileID: 572502066}
+  - {fileID: 532260236}
+  - {fileID: 1985563413}
+  - {fileID: 855810730}
+  - {fileID: 879563786}
+  - {fileID: 471143239}
+  - {fileID: 1444654815}
+  - {fileID: 695836308}
+  - {fileID: 1983752900}
+  - {fileID: 2006797034}
+  - {fileID: 1023713557}
+  - {fileID: 1456282025}
+  - {fileID: 316467167}
+  - {fileID: 1754422822}
+  - {fileID: 1209224053}
+  - {fileID: 518354838}
+  - {fileID: 630236297}
+  - {fileID: 1032434946}
