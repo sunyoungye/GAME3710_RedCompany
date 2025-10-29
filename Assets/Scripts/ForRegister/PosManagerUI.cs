@@ -16,8 +16,8 @@ public class PosManagerUI : MonoBehaviour
     public event Action<NpcController> OnOrderPaid;
 
     [Header("UI")]
-    public PosUI ui;                          // (기존에 쓰던 UI 바인딩용 스크립트)
-    public GameObject paymentCompletePanel;   // 선택 항목
+    public PosUI ui;                          
+    public GameObject paymentCompletePanel;  
 
     private readonly List<CartLine> _cart = new();
     private NpcController _current;
@@ -29,7 +29,6 @@ public class PosManagerUI : MonoBehaviour
 
     public void SetActiveCustomer(NpcController npc)
     {
-        // 같은 손님이면 다시 안내만
         if (_current == npc)
         {
             ui?.SetStatus("Place items, then tap card on reader.");
@@ -45,7 +44,6 @@ public class PosManagerUI : MonoBehaviour
         if (paymentCompletePanel) paymentCompletePanel.SetActive(false);
     }
 
-    /// <summary>아이템 클릭 시 POS 장바구니에 1개 라인 추가</summary>
     public void AddItemLine(ItemSO item)
     {
         if (item == null) return;
@@ -61,7 +59,6 @@ public class PosManagerUI : MonoBehaviour
         RefreshUI();
     }
 
-    // 카드리더기가 승인 신호를 줄 때 호출(Reader가 호출)
     public void OnCardAcceptedByReader(NpcController who)
     {
         if (who != _current) return;
@@ -75,7 +72,7 @@ public class PosManagerUI : MonoBehaviour
 
         var c = _current;
         _current = null;
-        OnOrderPaid?.Invoke(c);   // QueueManager/NPC 쪽에 결제 완료 신호
+        OnOrderPaid?.Invoke(c);   
     }
 
     private int Subtotal() => _cart.Sum(l => l.Line);

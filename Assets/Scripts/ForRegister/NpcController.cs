@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -25,10 +25,8 @@ public class NpcController : MonoBehaviour
     private PosManagerUI _pos;
     private readonly List<GameObject> _spawnedItems = new();
 
-    // Å¬¸¯ Ã³¸®ÇØ¾ß ÇÒ ³²Àº ¾ÆÀÌÅÛ ¼ö
     private int _remainingToScan = 0;
 
-    // ÇöÀç ¶° ÀÖ´Â Ä«µå(Áßº¹ ¼ÒÈ¯ ¹æÁö)
     private GameObject _cardInstance;
 
     public void Init(PosManagerUI pos, Transform counter, Transform exit, Transform[] slots, List<ItemSO> order)
@@ -44,18 +42,14 @@ public class NpcController : MonoBehaviour
 
     private IEnumerator Flow()
     {
-        // 1) Ä«¿îÅÍ·Î ÀÔÀå
         agent.isStopped = false;
         agent.SetDestination(counterPoint.position);
         yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + 0.05f);
 
-        // 2) ¾ÆÀÌÅÛ µå¶ø(= Å¬¸¯ ´ë±â)
         yield return DropItemsRandom();
 
-        // 3) POSÀÇ "È°¼º °í°´"À¸·Î ÀÚ½Å µî·Ï
         _pos.SetActiveCustomer(this);
 
-        // 4) °áÁ¦ ¿Ï·á±îÁö ´ë±â (PosManagerUI°¡ °áÁ¦ ¿Ï·á ½ÃÁ¡¿¡ ÀÌº¥Æ®·Î ¾Ë·ÁÁÜ)
         bool paid = false;
         void OnPaid(NpcController who) { if (who == this) paid = true; }
         _pos.OnOrderPaid += OnPaid;
@@ -63,7 +57,6 @@ public class NpcController : MonoBehaviour
         yield return new WaitUntil(() => paid);
         _pos.OnOrderPaid -= OnPaid;
 
-        // 5) ÅğÀå
         agent.isStopped = false;
         agent.SetDestination(exitPoint.position);
         yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + 0.05f);
@@ -73,7 +66,6 @@ public class NpcController : MonoBehaviour
 
     private IEnumerator DropItemsRandom()
     {
-        // Ä«¿îÅÍ ½½·Ô ÀÎµ¦½º ¼¯±â
         var indices = new List<int>();
         for (int i = 0; i < counterSlots.Length; i++) indices.Add(i);
         for (int i = 0; i < indices.Count; i++)
@@ -93,14 +85,13 @@ public class NpcController : MonoBehaviour
             GameObject go = Instantiate(so.prefab, slot.position, slot.rotation);
             var view = go.GetComponent<ItemView>();
             if (view == null) view = go.AddComponent<ItemView>();
-            view.Bind(so, _pos, this);   // ¡Ú 3°³ ÀÎÀÚ ¹ÙÀÎµù
+            view.Bind(so, _pos, this);   
 
             _spawnedItems.Add(go);
             yield return new WaitForSeconds(0.05f);
         }
     }
 
-    /// <summary>ItemView°¡ Å¬¸¯µÇ¾î POS¿¡ ¹İ¿µµÇ¾úÀ» ¶§¸¶´Ù È£Ãâ</summary>
     public void OneItemScanned()
     {
         _remainingToScan = Mathf.Max(0, _remainingToScan - 1);
@@ -117,6 +108,8 @@ public class NpcController : MonoBehaviour
         _cardInstance = Instantiate(cardPrefab, cardSpawnPoint.position, cardSpawnPoint.rotation);
         var token = _cardInstance.GetComponent<CardToken>();
         if (token == null) token = _cardInstance.AddComponent<CardToken>();
-        token.Init(this); // Ä«µå¿¡ "´©±¸ °ÍÀÎÁö" ÅÂ±ë
+
+        // âœ… ë³€ê²½: POSë„ í•¨ê»˜ ë„£ê¸° (ì´ POSê°€ ì´ë²¤íŠ¸ë¥¼ ì˜ëŠ” ë°”ë¡œ ê·¸ ì¸ìŠ¤í„´ìŠ¤)
+        token.Init(this, _pos);  // â† ê¸°ì¡´ì—ëŠ” token.Init(this) ë§Œ í–ˆìŒ
     }
 }

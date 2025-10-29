@@ -1,15 +1,23 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
 public class CardToken : MonoBehaviour
 {
     [HideInInspector] public NpcController owner;
+
+    // ✅ 추가: 이 카드를 관리하는 정확한 POS 인스턴스
+    public PosManagerUI pos { get; private set; }
+
     public bool isHeld { get; private set; }
     private Transform _holdAnchor;
 
-    public void Init(NpcController who) { owner = who; }
+    // ✅ 수정: POS도 함께 주입
+    public void Init(NpcController who, PosManagerUI posRef)
+    {
+        owner = who;
+        pos = posRef;
+    }
 
-    // SimpleGrabber ȣȯ(���� ���� ����)
     public void PickUp()
     {
         isHeld = true;
