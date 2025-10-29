@@ -5,6 +5,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     private bool playerInside = false;
     private PlayerController player; // reference to the player inside
 
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
