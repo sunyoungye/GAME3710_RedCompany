@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class Cleanupspill : MonoBehaviour
 {
     private bool playerInside = false;
     private PlayerController player; // reference to the player inside
