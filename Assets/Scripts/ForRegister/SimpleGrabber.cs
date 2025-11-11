@@ -4,6 +4,8 @@ public class SimpleGrabber : MonoBehaviour
 {
     [Header("Refs")]
     public Camera cam;
+
+
     public Transform handAnchor;     // 카메라 앞 손 위치
     [SerializeField] private PosManagerUI pos; // ✅ 추가: POS 참조
 
@@ -28,10 +30,11 @@ public class SimpleGrabber : MonoBehaviour
     void TryPick()
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out var hit, 100f))
+        int mask = ~LayerMask.GetMask("Player");
+        if (Physics.Raycast(ray, out var hit, 100f, mask, QueryTriggerInteraction.Ignore))
         {
             var card = hit.collider.GetComponentInParent<CardToken>();
-            if (card != null)
+            if (card)
             {
                 holding = card;
                 card.PickUp(handAnchor);
