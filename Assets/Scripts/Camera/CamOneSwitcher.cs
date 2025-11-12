@@ -1,52 +1,29 @@
-using System.Collections;
 using UnityEngine;
 
 public class CamOneSwitcher : MonoBehaviour
 {
-    [Header("Single Physical Camera")]
-    public Camera mainCam;
+    public enum Mode { TPS, POS }
+    public Mode mode = Mode.TPS;
 
     [Header("Mounts")]
-    public Transform tpsMount; // 일반 플레이 위치/각도
-    public Transform posMount; // POS 위치/각도
+    public Transform tpsMount;   
+    public Transform posMount;  
 
-    [Header("Blend")]
-    public float blendTime = 0.25f;
+    [Header("Smoothing")]
+    public float moveSpeed = 6f;   
+    public float rotSpeed = 10f;  
 
-    Coroutine _co;
+    Transform Target =>
+        mode == Mode.POS ? posMount : tpsMount;
 
-    public void ToPOS() => SwitchTo(posMount);
-    public void ToTPS() => SwitchTo(tpsMount);
-
-    void SwitchTo(Transform target)
+    void LateUpdate()
     {
-        if (!mainCam || !target) return;
-        if (_co != null) StopCoroutine(_co);
-        _co = StartCoroutine(BlendTo(target));
-    }
+        if (!Target) return;
 
-    IEnumerator BlendTo(Transform target)
-    {
-        var t0 = 0f;
-        var startPos = mainCam.transform.position;
-        var startRot = mainCam.transform.rotation;
+        float tPos = 1f - Mathf.Exp(-moveSpeed * Time.deltaTime);
+        float tRot = 1f - Mathf.Exp(-rotSpeed * Time.deltaTime);
 
-        while (t0 < blendTime)
-        {
-            t0 += Time.deltaTime;
-            float a = Mathf.SmoothStep(0f, 1f, t0 / blendTime);
-            mainCam.transform.position = Vector3.Lerp(startPos, target.position, a);
-            mainCam.transform.rotation = Quaternion.Slerp(startRot, target.rotation, a);
-            yield return null;
-        }
-
-        mainCam.transform.SetPositionAndRotation(target.position, target.rotation);
-    }
-
-    // 옵션: 시작 시 TPS로 스냅
-    void Start()
-    {
-        if (tpsMount && mainCam)
-            mainCam.transform.SetPositionAndRotation(tpsMount.position, tpsMount.rotation);
+        transform.position = Vector3.Lerp(transform.position, Target.position, tPos);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Target.rotation, tRot);
     }
 }
