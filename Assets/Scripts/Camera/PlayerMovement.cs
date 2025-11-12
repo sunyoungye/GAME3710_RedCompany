@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+public Camera camera;
 LayerMask layerMask;
 public Transform Grabarea;
 public static GameObject Grabbable;
@@ -103,10 +104,10 @@ public static GameObject Grabbable;
     }
  public void Grab()
     {
-
+    Ray grabbeam=camera.ScreenPointToRay(Input.mousePosition);
      RaycastHit hit;
-     if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
-     if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask)&& Grabbable == null) 
+     if (Physics.Raycast(grabbeam, out hit, Mathf.Infinity, layerMask))
+     if (Physics.Raycast(grabbeam, out hit, Mathf.Infinity, layerMask)&& Grabbable == null) 
         {
      Grabbable = hit.transform.gameObject;
      Grabbable.transform.SetParent(Grabarea);
