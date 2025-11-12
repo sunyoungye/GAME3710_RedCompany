@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+LayerMask layerMask;
+public Transform Grabarea;
+public static GameObject Grabbable;
     [Header("Movement")]
     public float moveSpeed;
 
@@ -98,7 +101,23 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
     }
+ public void Grab()
+    {
 
+     RaycastHit hit;
+     if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+     if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask)&& Grabbable == null) 
+        {
+     Grabbable = hit.transform.gameObject;
+     Grabbable.transform.SetParent(Grabarea);
+        }
+     }
+    public void Drop(){
+  if(Grabbable != null){
+        Grabbable.transform.parent=null;
+        Grabbable = null;
+        }
+        }
     private void Jump()
     {
         // reset y velocity
