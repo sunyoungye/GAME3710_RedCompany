@@ -1576,6 +1576,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'It has been decreed that thou shalt do the following:
 
+    
 
     <style="unchecked">Serve
     the customers  </style>
@@ -6152,8 +6153,8 @@ Transform:
   m_GameObject: {fileID: 1038806369}
   serializedVersion: 2
   m_LocalRotation: {x: 0.002301886, y: 3.243707e-10, z: 0.003695323, w: 0.9999905}
-  m_LocalPosition: {x: -40.58, y: -0.3, z: -0}
-  m_LocalScale: {x: 14, y: 6.458, z: 8}
+  m_LocalPosition: {x: -18.8, y: -0.2, z: 6}
+  m_LocalScale: {x: 6.4, y: 6.458, z: 4.08}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -11163,8 +11164,8 @@ Transform:
   m_GameObject: {fileID: 1967446336}
   serializedVersion: 2
   m_LocalRotation: {x: 0.002301886, y: 3.243707e-10, z: 0.003695323, w: 0.9999905}
-  m_LocalPosition: {x: -40.58, y: -0.3, z: -0}
-  m_LocalScale: {x: 14, y: 6.458, z: 8}
+  m_LocalPosition: {x: -18.8, y: -0.2, z: 6}
+  m_LocalScale: {x: 6.4, y: 6.458, z: 4.08}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
