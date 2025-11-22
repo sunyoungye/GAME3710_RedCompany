@@ -43,6 +43,26 @@ public static GameObject Grabbable;
 
     private void Update()
     {
+ void Grab()
+    {
+if (Input.GetMouseButtonDown(0))
+        {
+    Debug.Log("Work to god for christ sakes");
+     RaycastHit hit;
+     if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask)&& Grabbable == null) 
+        {
+ Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white); 
+     Grabbable = hit.transform.gameObject;
+     Grabbable.transform.SetParent(Grabarea);
+        }
+     }
+}
+    void Drop(){
+  if(Grabbable != null){
+        Grabbable.transform.parent=null;
+        Grabbable = null;
+        }
+        }
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
@@ -102,23 +122,6 @@ public static GameObject Grabbable;
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
     }
- public void Grab()
-    {
-    Ray grabbeam=camera.ScreenPointToRay(Input.mousePosition);
-     RaycastHit hit;
-     if (Physics.Raycast(grabbeam, out hit, Mathf.Infinity, layerMask))
-     if (Physics.Raycast(grabbeam, out hit, Mathf.Infinity, layerMask)&& Grabbable == null) 
-        {
-     Grabbable = hit.transform.gameObject;
-     Grabbable.transform.SetParent(Grabarea);
-        }
-     }
-    public void Drop(){
-  if(Grabbable != null){
-        Grabbable.transform.parent=null;
-        Grabbable = null;
-        }
-        }
     private void Jump()
     {
         // reset y velocity
