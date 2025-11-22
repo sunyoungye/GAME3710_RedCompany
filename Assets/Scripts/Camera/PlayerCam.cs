@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerCam : MonoBehaviour
 {
 LayerMask layerMask;
-public Transform Grabarea;
-public static GameObject Grabbable;
+    public Transform Grabarea;
+    public static GameObject Grabbable;
     public float sensX;
     public float sensY;
 
