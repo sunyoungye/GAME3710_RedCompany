@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-LayerMask layerMask;
-public Transform Grabarea;
-public static GameObject Grabbable;
     [Header("Movement")]
     public float moveSpeed;
 
@@ -42,12 +39,7 @@ public static GameObject Grabbable;
 
     private void Update()
     {
-    void Drop(){
-  if(Grabbable != null){
-        Grabbable.transform.parent=null;
-        Grabbable = null;
-        }
-        }
+ 
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 

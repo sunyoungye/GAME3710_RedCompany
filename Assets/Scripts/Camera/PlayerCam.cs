@@ -28,13 +28,17 @@ layerMask=LayerMask.GetMask("Player","Item");
 if (Input.GetMouseButtonDown(0))
         {
     Debug.Log("Work to god for christ sakes");
-Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white); 
      RaycastHit hit;
+Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white); 
      if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask)&& Grabbable == null) 
         {
  Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white); 
      Grabbable = hit.transform.gameObject;
      Grabbable.transform.SetParent(Grabarea);
+        }
+  if(Input.GetMouseButtonDown(1)&&Grabbable != null){
+        Grabbable.transform.parent=null;
+        Grabbable = null;
         }
 }
         // get mouse input
