@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-public Camera camera;
 LayerMask layerMask;
 public Transform Grabarea;
 public static GameObject Grabbable;
@@ -43,20 +42,6 @@ public static GameObject Grabbable;
 
     private void Update()
     {
- void Grab()
-    {
-if (Input.GetMouseButtonDown(0))
-        {
-    Debug.Log("Work to god for christ sakes");
-     RaycastHit hit;
-     if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask)&& Grabbable == null) 
-        {
- Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white); 
-     Grabbable = hit.transform.gameObject;
-     Grabbable.transform.SetParent(Grabarea);
-        }
-     }
-}
     void Drop(){
   if(Grabbable != null){
         Grabbable.transform.parent=null;
