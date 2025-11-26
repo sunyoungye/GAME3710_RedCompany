@@ -2,28 +2,25 @@ using UnityEngine;
 
 public class CamOneSwitcher : MonoBehaviour
 {
-    public enum Mode { TPS, POS }
-    public Mode mode = Mode.TPS;
+    public Camera tpsCam;   // 처음에 보이는 TPS 카메라
+    public Camera posCam;   // POS에서 보이는 카메라
 
-    [Header("Mounts")]
-    public Transform tpsMount;   
-    public Transform posMount;  
-
-    [Header("Smoothing")]
-    public float moveSpeed = 6f;   
-    public float rotSpeed = 10f;  
-
-    Transform Target =>
-        mode == Mode.POS ? posMount : tpsMount;
-
-    void LateUpdate()
+    void Start()
     {
-        if (!Target) return;
+        SetTPS();   // 시작할 때는 TPS 카메라만 켜두기
+    }
 
-        float tPos = 1f - Mathf.Exp(-moveSpeed * Time.deltaTime);
-        float tRot = 1f - Mathf.Exp(-rotSpeed * Time.deltaTime);
+    public void SetTPS()
+    {
+        if (tpsCam) tpsCam.enabled = true;
+        if (posCam) posCam.enabled = false;
+        Debug.Log("[CamOneSwitcher] TPS cam ON");
+    }
 
-        transform.position = Vector3.Lerp(transform.position, Target.position, tPos);
-        transform.rotation = Quaternion.Slerp(transform.rotation, Target.rotation, tRot);
+    public void SetPOS()
+    {
+        if (tpsCam) tpsCam.enabled = false;
+        if (posCam) posCam.enabled = true;
+        Debug.Log("[CamOneSwitcher] POS cam ON");
     }
 }

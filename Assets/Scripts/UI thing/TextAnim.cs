@@ -13,6 +13,8 @@ public class TextAnim : MonoBehaviour
     private int i = 0;
     private bool _isPlaying = false;
 
+    public event System.Action OnFinished;
+
     public void Play()
     {
         if (_isPlaying) return;
@@ -27,12 +29,13 @@ public class TextAnim : MonoBehaviour
         if (i <= stringArray.Length - 1)
         {
             _textMeshPro.text = stringArray[i];
-            _textMeshPro.maxVisibleCharacters = 0; 
+            _textMeshPro.maxVisibleCharacters = 0;
             StartCoroutine(TextVisible());
         }
         else
         {
-            _isPlaying = false; 
+            _isPlaying = false;
+            OnFinished?.Invoke();
         }
     }
 
@@ -50,7 +53,7 @@ public class TextAnim : MonoBehaviour
             if (visibleCount >= totalVisibleCharacters)
             {
                 i += 1;
-                yield return new WaitForSeconds(timeBtwnWords); 
+                yield return new WaitForSeconds(timeBtwnWords);
                 EndCheck();
                 yield break;
             }

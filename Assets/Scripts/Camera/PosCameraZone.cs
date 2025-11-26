@@ -15,12 +15,18 @@ public class PosCameraZone : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(playerTag))
-            switcher.mode = CamOneSwitcher.Mode.POS;
+        {
+            Debug.Log("POS ZONE ENTER");
+            if (switcher) switcher.SetPOS();
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(playerTag))
-            switcher.mode = CamOneSwitcher.Mode.TPS;
+        {
+            Debug.Log("POS ZONE EXIT");
+            if (switcher) switcher.SetTPS();
+        } 
     }
 }

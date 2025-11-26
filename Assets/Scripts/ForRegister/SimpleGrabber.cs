@@ -5,9 +5,8 @@ public class SimpleGrabber : MonoBehaviour
     [Header("Refs")]
     public Camera cam;
 
-
-    public Transform handAnchor;     // 카메라 앞 손 위치
-    [SerializeField] private PosManagerUI pos; // ✅ 추가: POS 참조
+    public Transform handAnchor;     
+    [SerializeField] private PosManagerUI pos; 
 
     private CardToken holding;
 
@@ -39,7 +38,6 @@ public class SimpleGrabber : MonoBehaviour
                 holding = card;
                 card.PickUp(handAnchor);
 
-                // ✅ 변경 핵심: Find로 POS 찾지 말고, "이 카드의 pos"로 결제 호출
                 if (card.pos != null && card.owner != null)
                 {
                     card.pos.OnCardAcceptedByReader(card.owner);

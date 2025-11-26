@@ -2,8 +2,12 @@ using UnityEngine;
 
 public class Cleanupspill : MonoBehaviour
 {
+    // for the UI
+    [SerializeField] private Quest quest;
+    [SerializeField] private int stepIndexToComplete = 0;
+
     private bool playerInside = false;
-    private PlayerController player; // reference to the player inside
+    private PlayerMovem player; // reference to the player inside
 
 
     void OnTriggerEnter(Collider other)
@@ -11,7 +15,7 @@ public class Cleanupspill : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInside = true;
-            player = other.GetComponent<PlayerController>(); // grab reference
+            player = other.GetComponent<PlayerMovem>(); // grab reference
         }
     }
 
@@ -26,17 +30,31 @@ public class Cleanupspill : MonoBehaviour
 
     void Update()
     {
-        if (playerInside && Input.GetKeyDown(KeyCode.F))
+        if (playerInside && Input.GetKeyDown(KeyCode.E))
         {
-            if (player != null && player.HasEquipped()) // ? only if mop equipped
+            Debug.Log($"E pressed, player = {player}");
+
+            if (player != null)
             {
-                Debug.Log("Spill cleaned!");
-                Destroy(gameObject);
+                bool has = player.HasEquipped();
+                Debug.Log("HasEquipped() = " + has);
+
+                if (has)
+                {
+                    Debug.Log("Spill cleaned!");
+                    quest.CompleteStep(stepIndexToComplete);
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    Debug.Log("You need a mop to clean this!");
+                }
             }
             else
             {
-                Debug.Log("You need a mop to clean this!");
+                Debug.Log("player is null");
             }
         }
     }
+
 }
