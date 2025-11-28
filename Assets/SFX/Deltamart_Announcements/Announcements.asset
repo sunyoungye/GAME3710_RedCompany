@@ -1,5 +1,15 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-7861620677190065072
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Deltamart5_{-7861620677190065072}
+  m_AudioClip: {fileID: 8300000, guid: 6bd6284edf9c9318abe8c1801aedca06, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
 --- !u!1233149941 &-7201750467733735173
 AudioContainerElement:
   m_ObjectHideFlags: 1
@@ -8,6 +18,16 @@ AudioContainerElement:
   m_PrefabAsset: {fileID: 0}
   m_Name: Deltamart3_{-7201750467733735173}
   m_AudioClip: {fileID: 8300000, guid: 17b8446252f0d72ee9d7c135749dbfdd, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &26683825310038031
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Deltamart4_{26683825310038031}
+  m_AudioClip: {fileID: 8300000, guid: 26f0314adbe8ba93b9322b811d106d8d, type: 3}
   m_Volume: 0
   m_Enabled: 1
 --- !u!1233149941 &670431199113537199
@@ -49,6 +69,8 @@ AudioRandomContainer:
   - {fileID: 3917280412244721139}
   - {fileID: -7201750467733735173}
   - {fileID: 670431199113537199}
+  - {fileID: 26683825310038031}
+  - {fileID: -7861620677190065072}
   m_AvoidRepeatingLast: 0
   m_PlaybackMode: 2
   m_TriggerMode: 0
