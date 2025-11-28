@@ -5467,14 +5467,14 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 910816136d828f30d8e9530a80a54418, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.899
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 1.66
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
@@ -5511,7 +5511,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.754
+      value: 0.767
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5526,7 +5526,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.3
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5541,7 +5541,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.769
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5571,7 +5571,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 1.66
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
@@ -5608,7 +5608,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.755
+      value: 0.485
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5623,7 +5623,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.3
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5638,7 +5638,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.767
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5656,13 +5656,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 408364251}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.55996615, z: -0, w: 0.8285155}
-  m_LocalPosition: {x: -0.33, y: 3.78, z: -0.81}
+  m_LocalRotation: {x: -0, y: -0.0991248, z: -0, w: 0.99507505}
+  m_LocalPosition: {x: -47.81, y: 7.47, z: 22.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -68.107, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -11.378, z: 0}
 --- !u!114 &408364255
 MonoBehaviour:
   m_ObjectHideFlags: 0
