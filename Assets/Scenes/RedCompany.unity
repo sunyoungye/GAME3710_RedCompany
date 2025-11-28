@@ -3880,7 +3880,6 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'It has been decreed that thou shalt do the following:
 
-    
 
     <style="unchecked">Serve
     the customers  </style>
@@ -5512,7 +5511,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.754
       inSlope: 0
       outSlope: 0
       tangentMode: 0
