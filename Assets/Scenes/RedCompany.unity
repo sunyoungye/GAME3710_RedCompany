@@ -1148,7 +1148,7 @@ Transform:
   m_GameObject: {fileID: 28960634}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.651, y: -0.186, z: 2.559}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5675,6 +5675,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f8bc1b57e820b33b436173637894ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  AudioTime: 0
+  MinAudioTime: 60
+  MaxAudioTime: 180
 --- !u!4 &414200659 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 012e33f0373694043bbf4fbcda194e70, type: 3}
