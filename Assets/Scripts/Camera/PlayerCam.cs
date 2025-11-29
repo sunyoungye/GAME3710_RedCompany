@@ -1,56 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCam : MonoBehaviour
 {
-LayerMask layerMask;
+    LayerMask layerMask;
     public Transform Grabarea;
-    public static GameObject Grabbable;
-    public float sensX;
-    public float sensY;
 
-    public Transform orientation;
-
-    float xRotation;
-    float yRotation;
+    private void Awake()
+    {
+        layerMask = LayerMask.GetMask("Player", "Item");
+    }
 
     private void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = true;
     }
-void Awake(){
-layerMask=LayerMask.GetMask("Player","Item");
-}
+
     private void Update()
     {
-if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && PlayerMovem.Grabbable == null)
         {
-    Debug.Log("Work to god for christ sakes");
-     RaycastHit hit;
-     if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask)&& Grabbable == null) 
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position,
+                                transform.forward,
+                                out hit,
+                                5f,
+                                layerMask))
+            {
+                PlayerMovem.Grabbable = hit.transform.gameObject;
+                PlayerMovem.Grabbable.transform.SetParent(Grabarea, true);
+                PlayerMovem.Grabbable.transform.localPosition = Vector3.zero;
+                PlayerMovem.Grabbable.transform.localRotation = Quaternion.identity;
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1) && PlayerMovem.Grabbable != null)
         {
- Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white); 
-     Grabbable = hit.transform.gameObject;
-     Grabbable.transform.SetParent(Grabarea);
+            PlayerMovem.Grabbable.transform.SetParent(null, true);
+            PlayerMovem.Grabbable = null;
         }
-  if(Input.GetMouseButtonDown(1)&&Grabbable != null){
-        Grabbable.transform.parent=null;
-        Grabbable = null;
-        }
-}
-        // get mouse input
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
-
-        yRotation += mouseX;
-
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
-        // rotate cam and orientation
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
     }
 }
