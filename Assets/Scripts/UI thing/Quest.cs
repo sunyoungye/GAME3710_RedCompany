@@ -20,7 +20,7 @@ public class Quest : MonoBehaviour
     {
         StringBuilder sb = new StringBuilder();
 
-        sb.AppendLine("It has been decreed that thou shalt do the following:");
+        sb.AppendLine("Job List:");
         sb.AppendLine();
 
         for (int i = 0; i < steps.Count; i++)
