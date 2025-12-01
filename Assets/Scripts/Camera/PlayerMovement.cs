@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    // === ADDED FOR CLEANUP SCRIPT ===
+    public static PlayerMovement Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+    // =================================
+
     [Header("Movement")]
     public float moveSpeed;
 
@@ -12,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
-    bool readyToJump;
+    bool readyToJump = true;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -39,9 +48,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
- 
         // ground check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        grounded = Physics.Raycast(
+            transform.position,
+            Vector3.down,
+            playerHeight * 0.5f + 0.2f,
+            whatIsGround
+        );
 
         MyInput();
         SpeedControl();
@@ -59,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         // when to jump
-        if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
 
@@ -80,11 +93,11 @@ public class PlayerMovement : MonoBehaviour
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         // on ground
-        if(grounded)
+        if (grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
         // in air
-        else if(!grounded)
+        else if (!grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
     }
 
@@ -93,12 +106,13 @@ public class PlayerMovement : MonoBehaviour
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
         // limit velocity if needed
-        if(flatVel.magnitude > moveSpeed)
+        if (flatVel.magnitude > moveSpeed)
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
     }
+
     private void Jump()
     {
         // reset y velocity
@@ -106,8 +120,18 @@ public class PlayerMovement : MonoBehaviour
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
+
     private void ResetJump()
     {
         readyToJump = true;
     }
+
+    // === OPTIONAL — USED BY CLEANUP SPILL ===
+    public bool HasEquipped()
+    {
+        // TODO: Replace with your actual equip logic
+        // Return TRUE only if the player has the mop equipped
+        return true;
+    }
+    // =========================================
 }

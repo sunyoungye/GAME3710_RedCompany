@@ -2,59 +2,74 @@ using UnityEngine;
 
 public class Cleanupspill : MonoBehaviour
 {
-    // for the UI
+    [Header("Quest Settings")]
     [SerializeField] private Quest quest;
     [SerializeField] private int stepIndexToComplete = 0;
 
     private bool playerInside = false;
-    private PlayerMovem player; // reference to the player inside
-
+    private PlayerMovem player; // reference to the player
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        Debug.Log("Trigger ENTER by: " + other.name);
+
+        // Check if this object OR parent has PlayerMovem component
+        player = other.GetComponent<PlayerMovem>();
+        if (player == null)
+            player = other.GetComponentInParent<PlayerMovem>();
+
+        if (player != null)
         {
             playerInside = true;
-            player = other.GetComponent<PlayerMovem>(); // grab reference
+            Debug.Log("Player detected: " + player.name);
+        }
+        else
+        {
+            Debug.Log("Non-player entered trigger.");
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        // Reset player reference if leaving
+        PlayerMovem exitingPlayer = other.GetComponent<PlayerMovem>();
+        if (exitingPlayer == null)
+            exitingPlayer = other.GetComponentInParent<PlayerMovem>();
+
+        if (exitingPlayer != null && exitingPlayer == player)
         {
             playerInside = false;
             player = null;
+            Debug.Log("Player exited trigger.");
         }
     }
 
     void Update()
     {
-        if (playerInside && Input.GetKeyDown(KeyCode.E))
+        if (!playerInside) return;
+
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log($"E pressed, player = {player}");
-
-            if (player != null)
+            if (player == null)
             {
-                bool has = player.HasEquipped();
-                Debug.Log("HasEquipped() = " + has);
+                Debug.LogError("Player is null even though inside trigger!");
+                return;
+            }
 
-                if (has)
-                {
-                    Debug.Log("Spill cleaned!");
+            if (player.HasEquipped())
+            {
+                Debug.Log("Spill cleaned!");
+                if (quest != null)
                     quest.CompleteStep(stepIndexToComplete);
-                    Destroy(gameObject);
-                }
                 else
-                {
-                    Debug.Log("You need a mop to clean this!");
-                }
+                    Debug.LogWarning("Quest reference not set on spill.");
+
+                Destroy(gameObject);
             }
             else
             {
-                Debug.Log("player is null");
+                Debug.Log("You need a mop to clean this!");
             }
         }
     }
-
 }
