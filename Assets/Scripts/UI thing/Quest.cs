@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
@@ -25,21 +25,23 @@ public class Quest : MonoBehaviour
 
         for (int i = 0; i < steps.Count; i++)
         {
-            if (steps[i].isCompleted)
-            {
-                sb.Append("<style=\"checked\">");
-                sb.Append(steps[i].description);
-                sb.Append("</style>\n");
-            }
-            else
-            {
-                sb.Append("<style=\"unchecked\">");
-                sb.Append(steps[i].description);
-                sb.Append("</style>\n");
-            }
+            // 체크/언체크 아이콘 정하기
+            string icon = steps[i].isCompleted ? "[X] " : "[ ] ";
+
+
+            // 색도 주고 싶으면 이렇게:
+            // string icon = steps[i].isCompleted ? "<color=#00FF00>☑ </color>" : "<color=#FFFFFF>☐ </color>";
+
+            sb.Append(icon);
+            sb.Append(steps[i].description);
+
+            if (i < steps.Count - 1)
+                sb.AppendLine();
         }
 
-        textField.SetText(sourceText:sb.ToString());
+        // Rich Text 사용하는 버전이면 SetText 말고 text 써도 됨
+        textField.SetText(sb.ToString());
+        // textField.text = sb.ToString();
     }
 
     public void CompleteStep(int index)
@@ -53,5 +55,4 @@ public class Quest : MonoBehaviour
     {
         CheckProgress();
     }
-
 }

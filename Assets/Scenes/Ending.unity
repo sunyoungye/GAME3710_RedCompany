@@ -246,12 +246,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -369,10 +369,10 @@ MonoBehaviour:
     you witnessed today was simply part of that cycle.\r\n\r\n<i>This game is inspired
     by real-world events.</i>\r\n\r\n--------------------------------------------------------------\r\n\r\n<b>Art</b> 
     \r\nRyan\r\n\r\n<b>Design</b>  \r\nJosie\r\n\r\n<b>Programming</b>  \r\nSunyoung 
-    \r\nConor  \r\nCarlos\r\n"
+    \r\nConor  \r\nCarlos\n\nThank you for playing!\r\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e713d5eb07b4c6941a9f90ee159f64c3, type: 2}
-  m_sharedMaterial: {fileID: 3776466040103083077, guid: e713d5eb07b4c6941a9f90ee159f64c3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5392c6da7652b244ebf9e3a19fb3121d, type: 2}
+  m_sharedMaterial: {fileID: -4473583419502691918, guid: 5392c6da7652b244ebf9e3a19fb3121d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -574,7 +574,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1298}
+  m_AnchoredPosition: {x: 0, y: -1204.05}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1828999795
@@ -587,7 +587,7 @@ Animator:
   m_GameObject: {fileID: 1828999793}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 337a8b2b2e43c104db3a5f98ba572ce4, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7f51aaac1112a7142b0b13e0a383a996, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -758,10 +758,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 730396528}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1947760827
 MonoBehaviour:

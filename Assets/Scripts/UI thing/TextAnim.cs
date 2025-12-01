@@ -8,6 +8,7 @@ public class TextAnim : MonoBehaviour
     [Header("UI Text")]
     [SerializeField] private TextMeshProUGUI _textMeshPro;
 
+
     [TextArea]
     [SerializeField] private string[] lines;
 
@@ -61,6 +62,7 @@ public class TextAnim : MonoBehaviour
 
         _textMeshPro.gameObject.SetActive(false);
         _isPlaying = false;
+
     }
 
     private IEnumerator TypeLine(string line)
