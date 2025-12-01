@@ -8552,9 +8552,12 @@ MonoBehaviour:
     
 
     <style="unchecked">Serve
-    the customers  </style>
+    the 4 customers  </style>
 
     <style="unchecked">Clean up spills on the floor</style>
+
+    <style="unchecked">Find
+    old monitor</style>
 
 '
   m_isRightToLeft: 0
@@ -11182,7 +11185,7 @@ Transform:
   m_GameObject: {fileID: 374989728}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -951.2, y: -537.88, z: 9.9}
+  m_LocalPosition: {x: -968.1, y: -538.18, z: -7.5}
   m_LocalScale: {x: 3.5323, y: 3.5323, z: 3.5323}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -28147,8 +28150,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 950145230}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.65562797, z: -0, w: 0.75508416}
-  m_LocalPosition: {x: 11.24, y: 2.03, z: 9.8}
+  m_LocalRotation: {x: -0, y: -0.9994567, z: -0, w: -0.032959625}
+  m_LocalPosition: {x: -0.78, y: 2.03, z: -3.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -28157,7 +28160,7 @@ Transform:
   - {fileID: 3557598}
   - {fileID: 1370932725}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -81.935, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -183.778, z: 0}
 --- !u!114 &950145233
 MonoBehaviour:
   m_ObjectHideFlags: 0
