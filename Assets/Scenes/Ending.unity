@@ -371,8 +371,8 @@ MonoBehaviour:
     \r\nRyan\r\n\r\n<b>Design</b>  \r\nJosie\r\n\r\n<b>Programming</b>  \r\nSunyoung 
     \r\nConor  \r\nCarlos\n\nThank you for playing!\r\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5392c6da7652b244ebf9e3a19fb3121d, type: 2}
-  m_sharedMaterial: {fileID: -4473583419502691918, guid: 5392c6da7652b244ebf9e3a19fb3121d, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

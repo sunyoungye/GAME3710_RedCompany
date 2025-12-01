@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class StockMilk : MonoBehaviour
 {
+    [SerializeField] private Quest quest;
+    [SerializeField] private int stepIndexToComplete = 3;
+
     [Header("Milk Cartons to Activate (in order)")]
     public GameObject[] milkSlots;
 
@@ -70,6 +73,11 @@ public class StockMilk : MonoBehaviour
 
             if (allFull && crateInside != null)
             {
+                if (quest != null)
+                    quest.CompleteStep(stepIndexToComplete);
+                else
+                    Debug.LogWarning("Look at the Quest!.");
+
                 // Destroy crate
                 Destroy(crateInside);
                 crateInside = null;
